@@ -34,14 +34,29 @@ var changeChin = document.getElementById('changeChin');
 var thinEye = document.getElementById('thinEye');
 var thinNose = document.getElementById('thinNose');
 var changeHead = document.getElementById('changeHead');
-var switchBg=document.getElementById('switchBg');
-var bgstate=document.getElementById('bgstate');
+
+var bgMax=document.getElementById('bgMax');
+var bgMin=document.getElementById('bgMin');
+
+var switchBgSeg=document.getElementById('switchBgSeg');
+var bgSegState=document.getElementById('bgSegState');
+
+var switchFace=document.getElementById('switchFace');
+var facebgstate=document.getElementById('facebgstate');
 
 var addImage = document.getElementById('addImage');
 var filePrew = document.getElementById('filePrew');
 
 var imagePath=new Array()                    // set image path array for record image path
 
+
+bgMax.addEventListener('input',function() {
+   
+})
+
+bgMin.addEventListener('input',function(){
+    
+})
 
 smoothSkin.addEventListener('input',function() {
     chrome.system.beautify.setSmoothSkin(parseInt(smoothSkin.value));
@@ -80,12 +95,24 @@ changeChin.addEventListener('input',function(){
 changeHead.addEventListener('input',function(){
     chrome.system.beautify.setShortForehead(parseInt(changeHead.value));
 })
-switchBg.addEventListener('click',function(){
-    if(switchBg.value=="checked"){
-        
-        bgstate.style.visibility="hidden";  
+
+switchBgSeg.addEventListener('click',function(){
+    if(switchBgSeg.checked){
+
+        bgSegState.style.display="none";  
     }else{
-        bgstate.style.visibility="visible";   
+     
+        bgSegState.style.display="block";   
+    }
+})
+
+switchFace.addEventListener('click',function(){
+    if(switchFace.checked){
+        facebgstate.style.display="none";  
+        console.log("checked value is== hidden")
+    }else{
+        console.log("checked value is== visible")
+        facebgstate.style.display="block";   
     }
 })
 

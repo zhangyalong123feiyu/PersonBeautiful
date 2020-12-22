@@ -10,7 +10,7 @@
 
 body {
     width: 400px;
-    height: 200px;
+    height: auto;
 }
 
 div {
@@ -54,21 +54,38 @@ a{
 </head>
 <body>
 <div>
+    
     <div>
-        <a>SmoothSkin</a> <input  id="smoothSkin" type="range" value="0" />
+        <div style="display:display;"><input id="switchBgSeg" type="checkbox" value="checked">BgSegment</div>
+
+        <div id="bgSegState">
+            <div>
+                <a>BgMaxValue</a>  <input id="bgMax" type="range"  />
+            </div>
+            <div >
+                <a>BgMinValue</a> <input id="bgMin" type="range"/>
+            </div>
+        </div>
     </div>
-    <div >
-        <a>SkinColor</a> <input  id="whiteSkin" type="range" value="0" />
-    </div>
-    <div style="display: none;"><input id="switchBg" type="checkbox" value="checked">BgSgment</div>
-    <div id="bgstate">
+
+
     <div  style="overflow-x: auto;margin-left: -25px;display: none;">
         　  <a class="btn_addPic">
             <input id="filePrew" type="file"">
             <div id="imgArea" style="float: left;"></div>
             <img src="./images/add.jpg" style="width: 80px;height: 80px;float: left;margin-top: 0px;">
           </a>
-        </div>
+     </div>
+
+    <div style="display:display;"><input id="switchFace" type="checkbox" value="checked">FaceBeauty</div>
+            
+    <div id="facebgstate">
+            <div>
+                <a>SmoothSkin</a> <input  id="smoothSkin" type="range" value="0" />
+            </div>
+            <div >
+                <a>SkinColor</a> <input  id="whiteSkin" type="range" value="0" />
+    </div>
     <div>
         <a>BigEye</a>  <input id="bigEye" type="range"  />
     </div>

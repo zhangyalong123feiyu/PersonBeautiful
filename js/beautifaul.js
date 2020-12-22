@@ -97,7 +97,7 @@ changeHead.addEventListener('input',function(){
 })
 
 switchBgSeg.addEventListener('click',function(){
-    if(switchBgSeg.checked){
+    if(!switchBgSeg.checked){
 
         bgSegState.style.display="none";  
     }else{
@@ -107,7 +107,7 @@ switchBgSeg.addEventListener('click',function(){
 })
 
 switchFace.addEventListener('click',function(){
-    if(switchFace.checked){
+    if(!switchFace.checked){
         facebgstate.style.display="none";  
         console.log("checked value is== hidden")
     }else{

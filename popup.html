@@ -2,6 +2,7 @@
 <head>
     
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;script-src * 'unsafe-inline'">
     <meta name="viewport" width="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <link rel="manifest" href="manifest.json" />
     
@@ -29,7 +30,23 @@ input{
 }
 a{
     width: max-content;
-    margin-left: 10px;
+    margin-left: 5px;
+}
+
+.btn_addPic{
+    display: inline-block; 
+    position: relative; 
+    overflow: hidden; 
+    cursor: pointer; 
+    text-align: center; 
+}
+#filePrew{ 
+    display: inline-block; 
+    position: relative; 
+    margin-left: -55px;
+    width: 50px; 
+    height: 50px; /*自行设置这个图片高度*/
+    opacity: 0;
 }
 
 </style>
@@ -38,11 +55,20 @@ a{
 <body>
 <div>
     <div>
-        <a>SmoothSkin</a> <input  id="smoothSkin" type="range" />
+        <a>SmoothSkin</a> <input  id="smoothSkin" type="range" value="0" />
     </div>
     <div >
-        <a>WhiteSkin</a> <input  id="whiteSkin" type="range"/>
+        <a>SkinColor</a> <input  id="whiteSkin" type="range" value="0" />
     </div>
+    <div style="display: none;"><input id="switchBg" type="checkbox" value="checked">BgSgment</div>
+    <div id="bgstate">
+    <div  style="overflow-x: auto;margin-left: -25px;display: none;">
+        　  <a class="btn_addPic">
+            <input id="filePrew" type="file"">
+            <div id="imgArea" style="float: left;"></div>
+            <img src="./images/add.jpg" style="width: 80px;height: 80px;float: left;margin-top: 0px;">
+          </a>
+        </div>
     <div>
         <a>BigEye</a>  <input id="bigEye" type="range"  />
     </div>
@@ -50,26 +76,27 @@ a{
         <a>ThinFace</a> <input id="thnFace" type="range"/>
     </div>
     <div>
-        <a>ShaveFace</a> <input id="shaveFace" type="range" />
+        <a>ShaveFace</a> <input id="shaveFace" type="range" value="0"/>
     </div>
     <div align="right">
-        <a>ChangeChin</a> <input id="changeChin" type="range" />
+        <a>ChangeChin</a> <input id="changeChin" type="range" value="0"/>
     </div>
     <div>
-        <a>BigMooth</a> <input id="bigMooth" type="range" />
+        <a>BigMouth</a> <input id="bigMouth" type="range" />
     </div>
     <div >
         <a>ThinNose</a> <input id="thinNose" type="range"/>
     </div>
     <div>
-        <a>ChangeHead</a> <input id="changeHead" type="range" />
+        <a>ChangeHead</a> <input id="changeHead" type="range" value="0" />
     </div>
     <div >
         <a>ThinEye</a> <input id="thinEye" type="range"/>
     </div>
 </div>
-
+</div>
 <script src="js/beautifaul.js"></script>
+
 
 </body>
 </html>

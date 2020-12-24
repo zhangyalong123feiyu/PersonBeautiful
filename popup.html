@@ -1,119 +1,126 @@
 <html>
+
 <head>
-    
+
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;script-src * 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;script-src * 'unsafe-inline'">
     <meta name="viewport" width="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <link rel="manifest" href="manifest.json" />
-    
-<style>
 
-body {
-    width: 400px;
-    height: auto;
-}
+    <style>
+        body {
+            width: 400px;
+            height: auto;
+        }
 
-div {
-    line-height: 40px;
-    font-size: 25px;
-    text-align: left;
-    white-space: nowrap;
-}
+        div {
+            line-height: 40px;
+            font-size: 25px;
+            text-align: left;
+            white-space: nowrap;
+        }
 
-input{
-    width: 55%;
-    margin-right: 10px;
-    text-align: right;
-    margin-top: 15px;
-    float: right;
+        input {
+            width: 55%;
+            margin-right: 10px;
+            text-align: right;
+            margin-top: 15px;
+            float: right;
 
-}
-a{
-    width: max-content;
-    margin-left: 5px;
-}
+        }
 
-.btn_addPic{
-    display: inline-block; 
-    position: relative; 
-    overflow: hidden; 
-    cursor: pointer; 
-    text-align: center; 
-}
-#filePrew{ 
-    display: inline-block; 
-    position: relative; 
-    margin-left: -55px;
-    width: 50px; 
-    height: 50px; /*自行设置这个图片高度*/
-    opacity: 0;
-}
+        a {
+            width: max-content;
+            margin-left: 5px;
+        }
 
-</style>
+        .btn_addPic {
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #filePrew {
+            display: inline-block;
+            position: relative;
+            margin-left: -55px;
+            width: 50px;
+            height: 50px;
+            /*自行设置这个图片高度*/
+            opacity: 0;
+        }
+    </style>
 
 </head>
-<body>
-<div>
-    
-    <div>
-        <div style="display:display;"><input id="switchBgSeg" type="checkbox" checked="checked">BgSegment</div>
 
-        <div id="bgSegState">
-            <div>
-                <a>BgMaxValue</a>  <input id="bgMax" type="range"  />
+<body>
+    <div>
+
+        <div>
+            <div style="display:display;"><input id="switchBgSeg" type="checkbox" checked="checked">BgSegment</div>
+
+            <div id="bgSegState" style="display: none;">
+                <div>
+                    <a>BgMaxValue</a> <input id="bgMax" type="range" />
+                </div>
+                <div>
+                    <a>BgMinValue</a> <input id="bgMin" type="range" />
+                </div>
+
+
+
             </div>
-            <div >
-                <a>BgMinValue</a> <input id="bgMin" type="range"/>
-            </div>
+
+            <div style="overflow-x: auto;margin-left: -25px;display: block;">
+                　 <a class="btn_addPic">
+                    <input id="filePrew" type="file"">
+                <div id="imgArea" style="float: left;"></div>
+            <img src="./images/add.jpg" style="width: 80px;height: 80px;float: left;margin-top: 0px;">
+            </a>
         </div>
     </div>
 
+    <div><input id="switchFace" type="checkbox" checked="checked">FaceBeauty</div>
 
-    <div  style="overflow-x: auto;margin-left: -25px;display: none;">
-        　  <a class="btn_addPic">
-            <input id="filePrew" type="file"">
-            <div id="imgArea" style="float: left;"></div>
-            <img src="./images/add.jpg" style="width: 80px;height: 80px;float: left;margin-top: 0px;">
-          </a>
-     </div>
-
-    <div style="display:display;"><input id="switchFace" type="checkbox" checked="checked">FaceBeauty</div>
-            
     <div id="facebgstate">
-            <div>
-                <a>SmoothSkin</a> <input  id="smoothSkin" type="range" value="0" />
-            </div>
-            <div >
-                <a>SkinColor</a> <input  id="whiteSkin" type="range" value="0" />
+        <div>
+            <a>SmoothSkin</a> <input id="smoothSkin" type="range" value="0" />
+        </div>
+        <div>
+            <a>SkinColor</a> <input id="whiteSkin" type="range" value="0" />
+        </div>
+        <div>
+            <a>BigEye</a> <input id="bigEye" type="range" />
+        </div>
+        <div>
+            <a>ThinFace</a> <input id="thnFace" type="range" />
+        </div>
+        <div>
+            <a>ShaveFace</a> <input id="shaveFace" type="range" value="0" />
+        </div>
+        <div align="right">
+            <a>ChangeChin</a> <input id="changeChin" type="range" value="0" />
+        </div>
+        <div>
+            <a>BigMouth</a> <input id="bigMouth" type="range" />
+        </div>
+        <div>
+            <a>ThinNose</a> <input id="thinNose" type="range" />
+        </div>
+        <div>
+            <a>ChangeHead</a> <input id="changeHead" type="range" value="0" />
+        </div>
+        <div>
+            <a>ThinEye</a> <input id="thinEye" type="range" />
+        </div>
     </div>
-    <div>
-        <a>BigEye</a>  <input id="bigEye" type="range"  />
     </div>
-    <div >
-        <a>ThinFace</a> <input id="thnFace" type="range"/>
-    </div>
-    <div>
-        <a>ShaveFace</a> <input id="shaveFace" type="range" value="0"/>
-    </div>
-    <div align="right">
-        <a>ChangeChin</a> <input id="changeChin" type="range" value="0"/>
-    </div>
-    <div>
-        <a>BigMouth</a> <input id="bigMouth" type="range" />
-    </div>
-    <div >
-        <a>ThinNose</a> <input id="thinNose" type="range"/>
-    </div>
-    <div>
-        <a>ChangeHead</a> <input id="changeHead" type="range" value="0" />
-    </div>
-    <div >
-        <a>ThinEye</a> <input id="thinEye" type="range"/>
-    </div>
-</div>
-</div>
-<script src="js/beautifaul.js"></script>
+    <script src="js/beautifaul.js"></script>
 
 
 </body>
+
 </html>

@@ -16,6 +16,11 @@
         "default_title": "美颜",
         "default_popup": "popup.html"
     },
+    "background": {
+        "scripts": [
+          "./js/background.js"
+        ]
+      },
     "permissions": [
         "management",
         "<all_urls>",

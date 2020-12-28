@@ -4,7 +4,9 @@ window.onload = () => {
     console.log("app is already loaded")
 
     imagePath = JSON.parse(localStorage.getItem('imgePath'))
-    if (imagePath == null) return
+    if (imagePath == null){
+        setLocalImage()
+    }
 
     console.log("img path size" + imagePath.length + "first is==" + imagePath[0])
     var imgArea = document.getElementById("imgArea");
@@ -12,14 +14,26 @@ window.onload = () => {
         var imgDiv = document.createElement('div')
         var img = document.createElement("img");
         var deleteImage = document.createElement("img");
+    
 
         imgDiv.style.display = "inline-block"
 
-        img.Width = 80;
         img.height = 80;
         var path = imagePath[index].split("&")
-        img.src = path[0]
-        img.alt = path[1]
+        if(index>0){
+            img.style.marginLeft=8
+        }
+
+        if(index<=2){
+            
+            img.src = path[1]
+            img.alt = path[1]
+            console.log("pre add image path is =="+path[1])
+        }else{
+            img.src = path[0]
+            img.alt = path[1]
+        }
+        
         imgDiv.alt = imagePath[index]
 
         deleteImage.width = 20
@@ -27,9 +41,13 @@ window.onload = () => {
         deleteImage.top=0
         deleteImage.right=0
         deleteImage.src = "./images/icon16.png"
+        
         imgDiv.appendChild(img)
-        imgDiv.appendChild(deleteImage)
-
+        
+        //default image not set delete image
+        if(index>2){
+            imgDiv.appendChild(deleteImage)
+        }
         imgArea.appendChild(imgDiv)
 
 
@@ -51,6 +69,22 @@ window.onload = () => {
     }
 
 }
+
+
+// add default images 
+function setLocalImage() {
+    path1="base64&"+"./images/bg1.jpg"
+    path2="base64&"+"./images/bg2.jpg"
+    path3="base64&"+"./images/bg3.jpg"
+
+    imagePath=new Array()
+    
+    imagePath.unshift(path1,path2,path3)    
+}
+
+
+var port = chrome.runtime.connect() //for background.js
+
 
 // for array delete element
 Array.prototype.indexOf = function (val) {
@@ -182,6 +216,7 @@ function initCpu() {
 }
 
 function handleFiles(files) {
+
     var imgArea = document.getElementById('imgArea');
     for (var i = 0; i < files.length; i++) {
 
@@ -202,6 +237,15 @@ function handleFiles(files) {
             console.log("图片路径是" + path[1])
         })
 
+        deleteImage.onclick = (function (dImage) {
+            return function (e) {
+                var parent = dImage.parentElement
+                imgArea.removeChild(parent)
+                imagePath.remove(parent.alt)
+                localStorage.setItem("imgePath", JSON.stringify(imagePath))
+            };
+        })(img);        
+
         imgDiv.style.display = "inline-block"
 
         img.width = 80;
@@ -216,7 +260,6 @@ function handleFiles(files) {
         deleteImage.top = 0
         deleteImage.right = 0
 
-
         deleteImage.style.position = "relative";
 
         // 假设 "preview" 是将要展示图片的 div
@@ -229,8 +272,10 @@ function handleFiles(files) {
                 return function (e) {
                     aImg.src = e.target.result;
                     img.alt = e.target.result + "&" + localPath;
+                    aImg.style.marginLeft=8
                     deleteImage.src = "./images/icon16.png"
                     setImage(img.alt)
+                    imgDiv.alt=img.alt
                     console.log("进入onload" + e.target.result)
                 };
             })(img);
@@ -253,9 +298,7 @@ function handleFiles(files) {
             console.log("image path size  == " + imagePath.length)
             localStorage.setItem("imgePath", JSON.stringify(imagePath))
             for (let index = 0; index < imagePath.length; index++) {
-
                 console.log("get image path from localstorage" + imagePath[index])
-
             }
 
         }

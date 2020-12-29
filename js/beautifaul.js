@@ -66,6 +66,21 @@ window.onload = () => {
             };
         })(img);
 
+
+        // mouse listioner 
+        imgDiv.onmouseenter = (function (ImgeDiv) {
+            return function (e) {
+                console.log("mouse enter" + ImgeDiv.alt)
+            };
+        })(img);
+
+        imgDiv.onmouseout = (function (ImgeDiv) {
+            return function (e) {
+                console.log("mouse out" + ImgeDiv.alt)
+           
+            };
+        })(img);
+
     }
 
 }
@@ -118,6 +133,9 @@ var bgMin = document.getElementById('bgMin');
 
 var switchBgSeg = document.getElementById('switchBgSeg');
 var bgSegState = document.getElementById('bgSegState');
+
+var switchBlur = document.getElementById('switchBlur');
+var blurState = document.getElementById('blurState');
 
 var switchFace = document.getElementById('switchFace');
 var facebgstate = document.getElementById('facebgstate');
@@ -174,29 +192,46 @@ changeHead.addEventListener('input', function () {
     chrome.system.beautify.setShortForehead(parseInt(changeHead.value));
 })
 
+
+switchBlur.addEventListener('click', function () {
+
+    if (!switchBlur.checked) {
+       
+        // chrome.system.beautify.enableBlur(false)
+        blurState.style.display = "none";
+    } else {
+        // chrome.system.beautify.enableBlur(true)
+        blurState.style.display = "block";
+    }
+})
+
 switchBgSeg.addEventListener('click', function () {
 
     if (!switchBgSeg.checked) {
-
         bgSegState.style.display = "none";
+        // chrome.system.beautify.enableBG(false)
     } else {
-
-        bgSegState.style.display = "none";
+        // chrome.system.beautify.enableBG(true)
+        bgSegState.style.display = "block";
     }
 })
 
 switchFace.addEventListener('click', function () {
     if (!switchFace.checked) {
+        
+        // chrome.system.beautify.enableBeautify(false)
         facebgstate.style.display = "none";
         console.log("checked value is== hidden")
+      
     } else {
-        console.log("checked value is== visible")
+        // chrome.system.beautify.enableBeautify(true)
         facebgstate.style.display = "block";
     }
 })
 
-filePrew.addEventListener('change', function () {
+filePrew.addEventListener('change', function (e) {
     handleFiles(this.files)
+    console.log(e.target.files[0]+"11111111111111")
 })
 
 function initCpu() {
@@ -226,7 +261,8 @@ function handleFiles(files) {
         if (!imageType.test(file.type)) {
             continue;
         }
-
+        
+        console.log("local image path is" + getObjectURL(file))
         var img = document.createElement("img");
         var deleteImage = document.createElement("img");           //delete button
         var imgDiv = document.createElement('div')
@@ -277,6 +313,7 @@ function handleFiles(files) {
                     setImage(img.alt)
                     imgDiv.alt=img.alt
                     console.log("进入onload" + e.target.result)
+
                 };
             })(img);
 
@@ -304,10 +341,18 @@ function handleFiles(files) {
         }
 
     }
+    
 }
 
-
-
-
-
+function getObjectURL(file) {
+    var url = null;
+    if (window.createObjcectURL != undefined) {
+        url = window.createOjcectURL(file);
+    } else if (window.URL != undefined) {
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) {
+        url = window.webkitURL.createObjectURL(file);
+    }
+    return url;
+}
 

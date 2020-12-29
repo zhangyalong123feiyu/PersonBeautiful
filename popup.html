@@ -12,6 +12,7 @@
         body {
             width: 400px;
             height: auto;
+            position:relative;
         }
 
         div {
@@ -56,29 +57,38 @@
 </head>
 
 <body>
-    <div>
 
-        <div>
+
+        <div style="overflow-y: auto;">
             <div style="display:display;"><input id="switchBgSeg" type="checkbox" >BgSegment</div>
 
             <div id="bgSegState" style="display: none;">
                 <div>
-                    <a>BgMaxValue</a> <input id="bgMax" type="range" />
+                    <a>BgMaxValue</a> <input id="bgMax" type="range" value="80"/>
                 </div>
                 <div>
-                    <a>BgMinValue</a> <input id="bgMin" type="range" />
+                    <a>BgMinValue</a> <input id="bgMin" type="range" value="20"/>
                 </div>
 
+                <div style="overflow-x: auto;margin-left: -25px;display: block;">
+                    　 <a class="btn_addPic">
+                        <input id="filePrew" type="file"">
+                    <div id="imgArea" style="float: left;"></div>
+                <img src="./images/add.jpg" style="width: 80px;height: 80px;float: left;margin-top: 0px;">
+                </a>
+
+            </div>
+                <div style="display:display;"><input id="switchBlur" type="checkbox" >Blur</div>
+
+                <div id="blurState" style="display: none;">
+                    <div>
+                        <a>BlurLevel</a> <input id="blurLevel" type="range" value="20"/>
+                    </div>
+                    
+                </div>
+    
             </div>
 
-            <div style="overflow-x: auto;margin-left: -25px;display: block;">
-                　 <a class="btn_addPic">
-                    <input id="filePrew" type="file"">
-                <div id="imgArea" style="float: left;"></div>
-            <img src="./images/add.jpg" style="width: 80px;height: 80px;float: left;margin-top: 0px;">
-            </a>
-        </div>
-    </div>
 
     <div><input id="switchFace" type="checkbox">FaceBeauty</div>
 
@@ -116,7 +126,6 @@
     </div>
     </div>
     <script src="js/beautifaul.js"></script>
-
 
 </body>
 

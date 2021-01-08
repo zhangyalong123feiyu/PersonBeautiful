@@ -3,6 +3,10 @@ window.onload = () => {
 
     console.log("app is already loaded")
 
+
+    resetState()
+    // resetprogress()
+
     imagePath = JSON.parse(localStorage.getItem('imgePath'))
     if (imagePath == null){
         setLocalImage()
@@ -86,6 +90,8 @@ window.onload = () => {
 }
 
 
+
+
 // add default images 
 function setLocalImage() {
     path1="base64&"+"./images/bg1.jpg"
@@ -147,51 +153,161 @@ var imagePath = new Array()                    // create image path array for re
 
 
 bgMax.addEventListener('input', function () {
-
+    chrome.system.beautify.setBGMax(parseInt(bgMax.value));
+    localStorage.setItem("bgMax", JSON.stringify((bgMax.value)))
 })
 
 bgMin.addEventListener('input', function () {
-
+    chrome.system.beautify.setBGMin(parseInt(bgMin.value));
+    localStorage.setItem("bgMin", JSON.stringify((bgMin.value)))
 })
 
 smoothSkin.addEventListener('input', function () {
     chrome.system.beautify.setSmoothSkin(parseInt(smoothSkin.value));
+    localStorage.setItem("smoothSkinValue", JSON.stringify((smoothSkin.value)))
 })
 
 whiteSkin.addEventListener('input', function () {
     chrome.system.beautify.setWhiteSkin(parseInt(whiteSkin.value));
+    localStorage.setItem("whiteSkin", JSON.stringify((whiteSkin.value)))
 })
 bigEye.addEventListener('input', function () {
     chrome.system.beautify.setBigEye(parseInt(bigEye.value));
+    localStorage.setItem("bigEye", JSON.stringify((bigEye.value)))
 })
 
 bigMouth.addEventListener('input', function () {
     chrome.system.beautify.setBigMouse(parseInt(bigMooth.value));
+    localStorage.setItem("bigMooth", JSON.stringify((bigMooth.value)))
 })
 
 thnFace.addEventListener('input', function () {
     chrome.system.beautify.setThinFace(parseInt(thnFace.value));
+    localStorage.setItem("thnFace", JSON.stringify((thnFace.value)))
 })
 
 shaveFace.addEventListener('input', function () {
     chrome.system.beautify.setShaveFace(parseInt(shaveFace.value));
+    localStorage.setItem("shaveFace", JSON.stringify((shaveFace.value)))
 })
 
 thinEye.addEventListener('input', function () {
     chrome.system.beautify.setThinEye(parseInt(thinEye.value));
+    localStorage.setItem("thinEye", JSON.stringify((thinEye.value)))
 })
 
 thinNose.addEventListener('input', function () {
     chrome.system.beautify.setThinNose(parseInt(thinNose.value));
+    localStorage.setItem("thinNose", JSON.stringify((thinNose.value)))
 })
 
 changeChin.addEventListener('input', function () {
     chrome.system.beautify.setShortChin(parseInt(changeChin.value));
+    localStorage.setItem("changeChin", JSON.stringify((changeChin.value)))
 })
 changeHead.addEventListener('input', function () {
     chrome.system.beautify.setShortForehead(parseInt(changeHead.value));
+    localStorage.setItem("changeHead", JSON.stringify((changeHead.value)))
 })
 
+
+function resetprogress() {
+
+    console.log("get the smooth skin value is"+smoothSkinValue)
+
+
+    var bgMax=JSON.parse(localStorage.getItem('bgMax'))
+    if(bgMax==null){
+	    chrome.system.beautify.setSmoothSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setSmoothSkin(bgMax)
+    }
+
+    var bgMin=JSON.parse(localStorage.getItem('bgMin'))
+    if(bgMin==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(bgMin)
+    }
+
+    var smoothSkinValue=JSON.parse(localStorage.getItem('smoothSkinValue'))
+    if(smoothSkinValue==null){
+	    chrome.system.beautify.setSmoothSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setSmoothSkin(smoothSkinValue)
+    }
+
+    var whiteSkin=JSON.parse(localStorage.getItem('whiteSkin'))
+    if(whiteSkin==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(whiteSkin)
+    }
+
+
+    var bigEye=JSON.parse(localStorage.getItem('bigEye'))
+    if(bigEye==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(bigEye)
+    }
+
+
+
+    var bigMooth=JSON.parse(localStorage.getItem('bigMooth'))
+    if(bigMooth==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(bigMooth)
+    }
+
+
+    var thnFace=JSON.parse(localStorage.getItem('thnFace'))
+    if(thnFace==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(thnFace)
+    }
+
+
+    var shaveFace=JSON.parse(localStorage.getItem('shaveFace'))
+    if(shaveFace==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(shaveFace)
+    }
+
+
+    var thinEye=JSON.parse(localStorage.getItem('thinEye'))
+    if(thinEye==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(thinEye)
+    }
+
+    var thinNose=JSON.parse(localStorage.getItem('thinNose'))
+    if(thinNose==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(thinNose)
+    }
+
+
+    var changeChin=JSON.parse(localStorage.getItem('changeChin'))
+    if(thinEye==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(changeChin)
+    }
+
+    var changeHead=JSON.parse(localStorage.getItem('changeHead'))
+    if(thinEye==null){
+	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    }else{
+        chrome.system.beautify.setWhiteSkin(changeHead)
+    }
+   
+}
 
 switchBlur.addEventListener('click', function () {
 
@@ -199,9 +315,11 @@ switchBlur.addEventListener('click', function () {
        
         // chrome.system.beautify.enableBlur(false)
         blurState.style.display = "none";
+        localStorage.setItem("switchBlur", JSON.stringify("none"))
     } else {
         // chrome.system.beautify.enableBlur(true)
         blurState.style.display = "block";
+        localStorage.setItem("switchBlur", JSON.stringify("block"))
     }
 })
 
@@ -210,9 +328,11 @@ switchBgSeg.addEventListener('click', function () {
     if (!switchBgSeg.checked) {
         bgSegState.style.display = "none";
         // chrome.system.beautify.enableBG(false)
+        localStorage.setItem("switchBgSeg", JSON.stringify("none"))
     } else {
         // chrome.system.beautify.enableBG(true)
         bgSegState.style.display = "block";
+        localStorage.setItem("switchBgSeg", JSON.stringify("block"))
     }
 })
 
@@ -222,12 +342,56 @@ switchFace.addEventListener('click', function () {
         // chrome.system.beautify.enableBeautify(false)
         facebgstate.style.display = "none";
         console.log("checked value is== hidden")
+        localStorage.setItem("switchFace", JSON.stringify("none"))
       
     } else {
         // chrome.system.beautify.enableBeautify(true)
         facebgstate.style.display = "block";
+        localStorage.setItem("switchFace", JSON.stringify("block"))
     }
 })
+
+
+
+// reset the application switch button state
+function resetState() {
+
+    var switchBlure=JSON.parse(localStorage.getItem('switchBlur'))
+    var switchBg=JSON.parse(localStorage.getItem('switchBgSeg'))
+    var switchF=JSON.parse(localStorage.getItem('switchFace'))
+ 
+    if(switchBlure=="none"){
+         console.log("swtch blure none")
+         switchBlur.checked=false
+         blurState.style.display="none"
+    }else{
+        console.log("swtch blure visible")
+        switchBlur.checked=true
+        blurState.style.display="block"
+    }
+ 
+    if(switchBg=="none"){
+        console.log("swtch BgSeg none")
+        switchBgSeg.checked=false
+        bgSegState.style.display="none"
+    }else{
+        console.log("swtch BgSeg visible")
+        switchBgSeg.checked=true
+        bgSegState.style.display="block"
+    }
+ 
+ if(switchF=="none"){
+        console.log("swtch blure none")
+        switchFace.checked=false
+        facebgstate.style.display="none"
+    }else{
+        console.log("swtch Face visible")
+        switchFace.checked=true
+        facebgstate.style.display="block"
+    }
+
+ }
+
 
 filePrew.addEventListener('change', function (e) {
     handleFiles(this.files)
@@ -355,4 +519,3 @@ function getObjectURL(file) {
     }
     return url;
 }
-

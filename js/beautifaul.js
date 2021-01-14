@@ -3,9 +3,8 @@ window.onload = () => {
 
     console.log("app is already loaded")
 
-
     resetState()
-    // resetprogress()
+    resetprogress()
 
     imagePath = JSON.parse(localStorage.getItem('imgePath'))
     if (imagePath == null){
@@ -19,7 +18,6 @@ window.onload = () => {
         var img = document.createElement("img");
         var deleteImage = document.createElement("img");
     
-
         imgDiv.style.display = "inline-block"
 
         img.height = 80;
@@ -81,15 +79,12 @@ window.onload = () => {
         imgDiv.onmouseout = (function (ImgeDiv) {
             return function (e) {
                 console.log("mouse out" + ImgeDiv.alt)
-           
             };
         })(img);
 
     }
 
 }
-
-
 
 
 // add default images 
@@ -252,8 +247,6 @@ function resetprogress() {
         chrome.system.beautify.setWhiteSkin(bigEye)
     }
 
-
-
     var bigMooth=JSON.parse(localStorage.getItem('bigMooth'))
     if(bigMooth==null){
 	    chrome.system.beautify.setWhiteSkin(parseInt(0))
@@ -313,11 +306,11 @@ switchBlur.addEventListener('click', function () {
 
     if (!switchBlur.checked) {
        
-        // chrome.system.beautify.enableBlur(false)
+        chrome.system.beautify.enableBlur(false)
         blurState.style.display = "none";
         localStorage.setItem("switchBlur", JSON.stringify("none"))
     } else {
-        // chrome.system.beautify.enableBlur(true)
+        chrome.system.beautify.enableBlur(true)
         blurState.style.display = "block";
         localStorage.setItem("switchBlur", JSON.stringify("block"))
     }
@@ -327,10 +320,10 @@ switchBgSeg.addEventListener('click', function () {
 
     if (!switchBgSeg.checked) {
         bgSegState.style.display = "none";
-        // chrome.system.beautify.enableBG(false)
+        chrome.system.beautify.enableBG(false)
         localStorage.setItem("switchBgSeg", JSON.stringify("none"))
     } else {
-        // chrome.system.beautify.enableBG(true)
+        chrome.system.beautify.enableBG(true)
         bgSegState.style.display = "block";
         localStorage.setItem("switchBgSeg", JSON.stringify("block"))
     }
@@ -339,13 +332,13 @@ switchBgSeg.addEventListener('click', function () {
 switchFace.addEventListener('click', function () {
     if (!switchFace.checked) {
         
-        // chrome.system.beautify.enableBeautify(false)
+        chrome.system.beautify.enableBeautify(false)
         facebgstate.style.display = "none";
         console.log("checked value is== hidden")
         localStorage.setItem("switchFace", JSON.stringify("none"))
       
     } else {
-        // chrome.system.beautify.enableBeautify(true)
+        chrome.system.beautify.enableBeautify(true)
         facebgstate.style.display = "block";
         localStorage.setItem("switchFace", JSON.stringify("block"))
     }

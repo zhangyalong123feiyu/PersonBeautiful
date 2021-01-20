@@ -27,7 +27,6 @@ window.onload = () => {
         }
 
         if(index<=2){
-            
             img.src = path[1]
             img.alt = path[1]
             console.log("pre add image path is =="+path[1])
@@ -116,13 +115,15 @@ Array.prototype.remove = function (val) {
         this.splice(index, 1);
     }
 };
-// for array delete element
+
 
 var smoothSkin = document.getElementById('smoothSkin');
 var whiteSkin = document.getElementById('whiteSkin');
+var blurLevel = document.getElementById('blurLevel');
+
 var bigEye = document.getElementById('bigEye');
 var bigMouth = document.getElementById('bigMouth');
-var thnFace = document.getElementById('thnFace');
+var thinFace = document.getElementById('thinFace');
 var shaveFace = document.getElementById('shaveFace');
 var changeChin = document.getElementById('changeChin');
 var thinEye = document.getElementById('thinEye');
@@ -157,6 +158,11 @@ bgMin.addEventListener('input', function () {
     localStorage.setItem("bgMin", JSON.stringify((bgMin.value)))
 })
 
+blurLevel.addEventListener('input', function () {
+    chrome.system.beautify.setBlurLevel(parseInt(blurLevel.value));
+    localStorage.setItem("blurLevel", JSON.stringify((blurLevel.value)))
+})
+
 smoothSkin.addEventListener('input', function () {
     chrome.system.beautify.setSmoothSkin(parseInt(smoothSkin.value));
     localStorage.setItem("smoothSkinValue", JSON.stringify((smoothSkin.value)))
@@ -172,13 +178,13 @@ bigEye.addEventListener('input', function () {
 })
 
 bigMouth.addEventListener('input', function () {
-    chrome.system.beautify.setBigMouse(parseInt(bigMooth.value));
-    localStorage.setItem("bigMooth", JSON.stringify((bigMooth.value)))
+    chrome.system.beautify.setBigMouse(parseInt(bigMouth.value));
+    localStorage.setItem("bigMouth", JSON.stringify((bigMouth.value)))
 })
 
-thnFace.addEventListener('input', function () {
-    chrome.system.beautify.setThinFace(parseInt(thnFace.value));
-    localStorage.setItem("thnFace", JSON.stringify((thnFace.value)))
+thinFace.addEventListener('input', function () {
+    chrome.system.beautify.setThinFace(parseInt(thinFace.value));
+    localStorage.setItem("thinFace", JSON.stringify((thinFace.value)))
 })
 
 shaveFace.addEventListener('input', function () {
@@ -208,96 +214,126 @@ changeHead.addEventListener('input', function () {
 
 function resetprogress() {
 
-    console.log("get the smooth skin value is"+smoothSkinValue)
+    var bgMaxs=JSON.parse(localStorage.getItem('bgMax'))
+    if(bgMaxs==null){
+        chrome.system.beautify.setBGMax(parseInt(80))
+        bgMax.value=80
+    }else{
+        bgMax.value=bgMaxs
+        chrome.system.beautify.setBGMax(parseInt(bgMaxs))
+    }
 
+    var bgMins=JSON.parse(localStorage.getItem('bgMin'))
+    if(bgMins==null){
+        bgMin.value=20
+	    chrome.system.beautify.setBGMin(parseInt(20))
+    }else{
+        bgMin.value=bgMins
+        chrome.system.beautify.setBGMin(parseInt(bgMins))
+    }
 
-    var bgMax=JSON.parse(localStorage.getItem('bgMax'))
-    if(bgMax==null){
+    var blurLevels=JSON.parse(localStorage.getItem('blurLevel'))
+    if(blurLevels==null){
+        blurLevel.value=20
+	    chrome.system.beautify.setBlurLevel(parseInt(20))
+    }else{
+        blurLevel.value=blurLevels
+        chrome.system.beautify.setBlurLevel(parseInt(blurLevels))
+    }
+
+    var smoothSkinValues=JSON.parse(localStorage.getItem('smoothSkinValue'))
+    if(smoothSkinValues==null){
+        smoothSkin.value=0
 	    chrome.system.beautify.setSmoothSkin(parseInt(0))
     }else{
-        chrome.system.beautify.setSmoothSkin(bgMax)
+        smoothSkin.value=smoothSkinValues
+        chrome.system.beautify.setSmoothSkin(parseInt(smoothSkinValues))
     }
 
-    var bgMin=JSON.parse(localStorage.getItem('bgMin'))
-    if(bgMin==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    var whiteSkins=JSON.parse(localStorage.getItem('whiteSkin'))
+    if(whiteSkins==null){
+        whiteSkin.value=50
+	    chrome.system.beautify.setWhiteSkin(parseInt(50))
     }else{
-        chrome.system.beautify.setWhiteSkin(bgMin)
-    }
-
-    var smoothSkinValue=JSON.parse(localStorage.getItem('smoothSkinValue'))
-    if(smoothSkinValue==null){
-	    chrome.system.beautify.setSmoothSkin(parseInt(0))
-    }else{
-        chrome.system.beautify.setSmoothSkin(smoothSkinValue)
-    }
-
-    var whiteSkin=JSON.parse(localStorage.getItem('whiteSkin'))
-    if(whiteSkin==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
-    }else{
-        chrome.system.beautify.setWhiteSkin(whiteSkin)
+        whiteSkin.value=whiteSkins
+        chrome.system.beautify.setWhiteSkin(parseInt(whiteSkins))
     }
 
 
-    var bigEye=JSON.parse(localStorage.getItem('bigEye'))
-    if(bigEye==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    var bigEyes=JSON.parse(localStorage.getItem('bigEye'))
+    if(bigEyes==null){
+        bigEye.value=50
+	    chrome.system.beautify.setBigEye(parseInt(50))
     }else{
-        chrome.system.beautify.setWhiteSkin(bigEye)
+        bigEye.value=bigEyes
+        chrome.system.beautify.setBigEye(parseInt(bigEyes))
     }
 
-    var bigMooth=JSON.parse(localStorage.getItem('bigMooth'))
-    if(bigMooth==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    var bigMouths=JSON.parse(localStorage.getItem('bigMouth'))
+    if(bigMouths==null){
+        bigMouth.value=50
+	    chrome.system.beautify.setBigMouth(parseInt(50))
     }else{
-        chrome.system.beautify.setWhiteSkin(bigMooth)
-    }
-
-
-    var thnFace=JSON.parse(localStorage.getItem('thnFace'))
-    if(thnFace==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
-    }else{
-        chrome.system.beautify.setWhiteSkin(thnFace)
+        bigMouth.value=bigMouths
+        chrome.system.beautify.setBigMouth(parseInt(bigMouths))
     }
 
 
-    var shaveFace=JSON.parse(localStorage.getItem('shaveFace'))
-    if(shaveFace==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    var thinFaces=JSON.parse(localStorage.getItem('thinFace'))
+    if(thinFaces==null){
+        thinFace.value=50
+	    chrome.system.beautify.setThinFace(parseInt(50))
     }else{
-        chrome.system.beautify.setWhiteSkin(shaveFace)
+        thinFace.value=thinFaces
+        chrome.system.beautify.setThinFace(parseInt(thinFaces))
     }
 
 
-    var thinEye=JSON.parse(localStorage.getItem('thinEye'))
-    if(thinEye==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    var shaveFaces=JSON.parse(localStorage.getItem('shaveFace'))
+    if(shaveFaces==null){
+        shaveFace.value=0
+	    chrome.system.beautify.setShaveFace(parseInt(0))
     }else{
-        chrome.system.beautify.setWhiteSkin(thinEye)
-    }
-
-    var thinNose=JSON.parse(localStorage.getItem('thinNose'))
-    if(thinNose==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
-    }else{
-        chrome.system.beautify.setWhiteSkin(thinNose)
+        shaveFace.value=shaveFaces
+        chrome.system.beautify.setShaveFace(parseInt(shaveFaces))
     }
 
 
-    var changeChin=JSON.parse(localStorage.getItem('changeChin'))
-    if(thinEye==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    var thinEyes=JSON.parse(localStorage.getItem('thinEye'))
+    if(thinEyes==null){
+        thinEye.value=50
+	    chrome.system.beautify.setThinEye(parseInt(50))
     }else{
-        chrome.system.beautify.setWhiteSkin(changeChin)
+        thinEye.value=thinEyes
+        chrome.system.beautify.setThinEye(parseInt(thinEyes))
     }
 
-    var changeHead=JSON.parse(localStorage.getItem('changeHead'))
-    if(thinEye==null){
-	    chrome.system.beautify.setWhiteSkin(parseInt(0))
+    var thinNoses=JSON.parse(localStorage.getItem('thinNose'))
+    if(thinNoses==null){
+        thinNose.value=50
+	    chrome.system.beautify.setThinNose(parseInt(50))
     }else{
-        chrome.system.beautify.setWhiteSkin(changeHead)
+        thinNose.value=thinNoses
+        chrome.system.beautify.setThinNose(parseInt(thinNoses))
+    }
+
+
+    var changeChins=JSON.parse(localStorage.getItem('changeChin'))
+    if(changeChins==null){
+        changeChin.value=50
+	    chrome.system.beautify.setShortChin(parseInt(50))
+    }else{
+        changeChin.value=changeChins
+        chrome.system.beautify.setShortChin(parseInt(changeChins))
+    }
+
+    var changeHeads=JSON.parse(localStorage.getItem('changeHead'))
+    if(changeHeads==null){
+        changeHead.value=50
+	    chrome.system.beautify.setShortForehead(parseInt(50))
+    }else{
+        changeHead.value=changeHeads
+        chrome.system.beautify.setShortForehead(parseInt(changeHeads))
     }
    
 }
@@ -356,30 +392,36 @@ function resetState() {
     if(switchBlure=="none"){
          console.log("swtch blure none")
          switchBlur.checked=false
+         chrome.system.beautify.enableBlur(false)
          blurState.style.display="none"
     }else{
         console.log("swtch blure visible")
         switchBlur.checked=true
+        chrome.system.beautify.enableBlur(true)
         blurState.style.display="block"
     }
  
     if(switchBg=="none"){
         console.log("swtch BgSeg none")
         switchBgSeg.checked=false
+        chrome.system.beautify.enableBG(false)
         bgSegState.style.display="none"
     }else{
         console.log("swtch BgSeg visible")
         switchBgSeg.checked=true
+        chrome.system.beautify.enableBG(true)
         bgSegState.style.display="block"
     }
  
  if(switchF=="none"){
         console.log("swtch blure none")
         switchFace.checked=false
+        chrome.system.beautify.enableBeautify(false)
         facebgstate.style.display="none"
     }else{
         console.log("swtch Face visible")
         switchFace.checked=true
+        chrome.system.beautify.enableBeautify(true)
         facebgstate.style.display="block"
     }
 
@@ -391,21 +433,6 @@ filePrew.addEventListener('change', function (e) {
     console.log(e.target.files[0]+"11111111111111")
 })
 
-function initCpu() {
-
-    chrome.system.cpu.getInfo(function (cpuInfo) {
-
-        var cpuName = cpuInfo.modelName.replace(/\(R\)/g, '®').replace(/\(TM\)/, '™');
-        console.log("cpuName-" + cpuName);
-
-        var cpuArch = cpuInfo.archName.replace(/_/g, '-');
-        console.log("cpuArch-" + cpuArch);
-
-        var cpuFeatures = cpuInfo.features.join(', ').toUpperCase().replace(/_/g, '.') || '-';
-        console.log("cpuFeatures-" + cpuFeatures);
-    });
-
-}
 
 function handleFiles(files) {
 
